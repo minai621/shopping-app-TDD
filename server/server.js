@@ -12,7 +12,7 @@ app.use(cors({
     credentials: true
 }));
 
-app.use(express.static('public'));
+app.use(express.static('./server/public'));
 
 const travelDataRaw = fs.readFileSync('./server/travel.json', 'utf-8');
 const travelData = JSON.parse(travelDataRaw);

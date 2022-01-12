@@ -51,7 +51,7 @@ export default function Type({ orderType }: OrderType): React.ReactElement {
       <div
         style={{
           display: 'flex',
-          flexDirection: (orderType === 'options' && 'column') || 'row',
+          flexDirection: orderType === 'options' ? 'column' : 'row',
         }}
       >
         {optionItems}
