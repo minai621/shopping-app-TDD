@@ -1,12 +1,11 @@
 import React from 'react';
 import './App.css';
+import OrderPage from './pages/OrderPage/OrderPage';
 
 function App() {
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <div className='asd'></div>
-      </header>
+    <div style={{ padding: '4rem' }}>
+      <OrderPage />
     </div>
   );
 }
