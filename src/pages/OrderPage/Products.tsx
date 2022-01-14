@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 
-export type ProductType = {
+export type ProductsType = {
   name: string;
   imagePath: string;
+  updateItemCount: (itemName: string, newItemCount: number) => void;
 };
 
-export default function Products({ name, imagePath }: ProductType) {
+export default function Products({
+  name,
+  imagePath,
+  updateItemCount,
+}: ProductsType) {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const currentValue = Number(event.target.value);
+    updateItemCount(name, currentValue);
+  };
   return (
     <div style={{ textAlign: 'center' }}>
       <img
@@ -14,13 +23,17 @@ export default function Products({ name, imagePath }: ProductType) {
         alt={`${name} product`}
       />
       <form style={{ marginTop: '10px' }}>
-        <label style={{ textAlign: 'right' }}>{name}</label>
+        <label htmlFor={name} style={{ textAlign: 'right' }}>
+          {name}
+        </label>
         <input
+          id={name}
           style={{ marginLeft: 7 }}
           type='number'
           name='quantity'
           min='0'
           defaultValue={0}
+          onChange={handleChange}
         />
       </form>
     </div>

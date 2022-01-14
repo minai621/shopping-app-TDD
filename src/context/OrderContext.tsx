@@ -1,6 +1,7 @@
+import React from 'react';
 import { createContext, useEffect, useMemo, useState } from 'react';
 
-export const OrderContext = createContext('props');
+export const OrderContext = createContext<Array<any>>([]);
 
 type OrderType = 'products' | 'options';
 type OrderCount = Record<OrderType, Map<string, number>>;
@@ -47,13 +48,13 @@ export function OrderContextProvider(props: any) {
   const value = useMemo(() => {
     function updateItemCount(
       itemName: string,
-      newItemCount: string,
+      newItemCount: number,
       orderType: OrderType,
     ) {
       const newOrderCounts = { ...orderCount };
 
       const orderCountsMap = orderCount[orderType];
-      orderCountsMap.set(itemName, parseInt(newItemCount));
+      orderCountsMap.set(itemName, newItemCount);
 
       setOrderCount(newOrderCounts);
     }
