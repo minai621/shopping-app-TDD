@@ -52,14 +52,21 @@ export function OrderContextProvider(props: any) {
       orderType: OrderType,
     ) {
       const newOrderCounts = { ...orderCount };
-
       const orderCountsMap = orderCount[orderType];
-      orderCountsMap.set(itemName, newItemCount);
+      if (orderCount[orderType]) {
+        orderCountsMap.set(itemName, newItemCount);
+      }
 
       setOrderCount(newOrderCounts);
     }
+    const resetOrderData = () => {
+      setOrderCount({
+        products: new Map<string, number>(),
+        options: new Map<string, number>(),
+      });
+    };
 
-    return [{ ...orderCount, total }, updateItemCount];
+    return [{ ...orderCount, total }, updateItemCount, resetOrderData];
   }, [orderCount, total]);
 
   return <OrderContext.Provider value={value} {...props} />;

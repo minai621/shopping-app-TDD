@@ -1,3 +1,4 @@
+import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
 import { render, screen } from './test-util';
@@ -56,4 +57,35 @@ test('From order to order completion', async () => {
     name: '주문 확인',
   });
   userEvent.click(confirmOrderButton);
+
+  // 주문 완료 페이지
+  const loading = screen.getByText(/loading/i);
+  expect(loading).toBeInTheDocument();
+
+  const completeHeader = await screen.findByRole('heading', {
+    name: '주문이 성공했습니다.',
+  });
+  expect(completeHeader).toBeInTheDocument();
+
+  const loadingDissapeared = screen.queryByText('loading');
+  expect(loadingDissapeared).not.toBeInTheDocument();
+
+  const firstPageButton = screen.getByRole('button', {
+    name: '첫 페이지로',
+  });
+  expect(firstPageButton).toBeInTheDocument();
+  userEvent.click(firstPageButton);
+
+  // const
+
+  // const productsTotal = screen.getAllByTestId('price');
+  // const itemType = ['상품', '옵션'];
+  // for (let i = 0; i < itemType.length; i++) {
+  //   expect(productsTotal[i]).toHaveTextContent(itemType[i]);
+  // }
+
+  await waitFor(() => {
+    screen.getByRole('spinbutton', { name: 'America' });
+  });
+  //await screen.findByRole('spinbutton', { name: 'America' });
 });

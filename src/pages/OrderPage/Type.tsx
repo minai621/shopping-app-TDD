@@ -21,7 +21,7 @@ export default function Type({ orderType }: OrderType): React.ReactElement {
 
   useEffect(() => {
     loadItems(orderType);
-  }, [orderType]);
+  }, []);
 
   const loadItems = async (orderType: string) => {
     try {
@@ -53,8 +53,8 @@ export default function Type({ orderType }: OrderType): React.ReactElement {
     <>
       <h2>주문 종류</h2>
       <p>하나의 가격:</p>
-      <p>
-        {orderTypeKorean} 총 가격:{orderData.total.total}
+      <p data-testid='price'>
+        {orderTypeKorean} 총 가격: {orderData.total.total}
       </p>
       <div
         style={{
