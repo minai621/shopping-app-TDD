@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '../../../test-util';
 import SummaryPage from '../SummaryPage';
 
 test('checkbox and button', () => {
@@ -8,8 +8,6 @@ test('checkbox and button', () => {
   });
   expect(checkbox).not.toBeChecked();
 
-  const confirmButton = screen.getByRole('button', {
-    name: '주문 확인',
-  });
+  const confirmButton = screen.getByRole('button', { name: '주문 확인' });
   expect(confirmButton).toBeDisabled();
 });
